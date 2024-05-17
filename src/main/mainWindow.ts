@@ -39,6 +39,7 @@ import {
 } from "./constants";
 import { darwinURL } from "./index";
 import { sendRendererCommand } from "./ipcCommands";
+import { initKeybinds } from "./keybinds";
 import { Settings, State, VencordSettings } from "./settings";
 import { createSplashWindow, updateSplashMessage } from "./splash";
 import { makeLinksOpenExternally } from "./utils/makeLinksOpenExternally";
@@ -556,4 +557,5 @@ export async function createWindows() {
     });
 
     initArRPC();
+    initKeybinds();
 }

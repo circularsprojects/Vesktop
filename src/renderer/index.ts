@@ -31,3 +31,21 @@ customSettingsSections.push(() => ({
     element: SettingsUi,
     className: "vc-vesktop-settings"
 }));
+
+const arRPC = Vencord.Plugins.plugins["WebRichPresence (arRPC)"] as any as {
+    handleEvent(e: MessageEvent): void;
+};
+
+VesktopNative.arrpc.onActivity(data => {
+    if (!Settings.store.arRPC) return;
+
+    arRPC.handleEvent(new MessageEvent("message", { data }));
+});
+
+VesktopNative.voice.onToggleSelfMute(() => {
+    findByPropsLazy("toggleSelfMute").toggleSelfMute();
+});
+
+VesktopNative.voice.onToggleSelfDeaf(() => {
+    findByPropsLazy("toggleSelfDeaf").toggleSelfDeaf();
+});
