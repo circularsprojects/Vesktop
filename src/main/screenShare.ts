@@ -11,7 +11,7 @@ import { IpcCommands, IpcEvents } from "shared/IpcEvents";
 import { sendRendererCommand } from "./ipcCommands";
 import { handle } from "./utils/ipcWrappers";
 
-const isWayland =
+export const isWayland =
     process.platform === "linux" && (process.env.XDG_SESSION_TYPE === "wayland" || !!process.env.WAYLAND_DISPLAY);
 
 export function registerScreenShareHandler() {
