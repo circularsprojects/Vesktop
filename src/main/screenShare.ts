@@ -9,10 +9,8 @@ import type { StreamPick } from "renderer/components/ScreenSharePicker";
 import { IpcCommands, IpcEvents } from "shared/IpcEvents";
 
 import { sendRendererCommand } from "./ipcCommands";
+import { isWayland } from "./constants";
 import { handle } from "./utils/ipcWrappers";
-
-export const isWayland =
-    process.platform === "linux" && (process.env.XDG_SESSION_TYPE === "wayland" || !!process.env.WAYLAND_DISPLAY);
 
 export function registerScreenShareHandler() {
     handle(IpcEvents.CAPTURER_GET_LARGE_THUMBNAIL, async (_, id: string) => {

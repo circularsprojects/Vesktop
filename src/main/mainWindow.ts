@@ -32,6 +32,7 @@ import {
     DATA_DIR,
     DEFAULT_HEIGHT,
     DEFAULT_WIDTH,
+    isWayland,
     MessageBoxChoice,
     MIN_HEIGHT,
     MIN_WIDTH,
@@ -40,7 +41,6 @@ import {
 import { darwinURL } from "./index";
 import { sendRendererCommand } from "./ipcCommands";
 import { initKeybinds } from "./keybinds";
-import { isWayland } from "./screenShare";
 import { Settings, State, VencordSettings } from "./settings";
 import { createSplashWindow, updateSplashMessage } from "./splash";
 import { makeLinksOpenExternally } from "./utils/makeLinksOpenExternally";
