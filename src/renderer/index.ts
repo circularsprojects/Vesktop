@@ -45,5 +45,4 @@ VesktopNative.arrpc.onActivity(data => {
 const VoiceActions = findByPropsLazy("toggleSelfMute");
 
 VesktopNative.voice.onToggleSelfMute(() => VoiceActions.toggleSelfMute());
-
 VesktopNative.voice.onToggleSelfDeaf(() => VoiceActions.toggleSelfDeaf());
