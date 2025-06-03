@@ -28,6 +28,7 @@ const server = createServer(socket => {
         var data = d.toString().replaceAll("\n", "");
         // console.log("Received data from keybind:", data);
         sendRendererCommand(IpcCommands.KEYBIND_ACTION, data);
+        socket.end();
     });
     socket.on("error", err => {
         console.error("Keybind socket error:", err);
