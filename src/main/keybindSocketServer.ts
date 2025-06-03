@@ -14,6 +14,7 @@ import { unlinkSync } from "fs";
 import { createServer } from "net";
 import { join } from "path";
 import { env, platform } from "process";
+import { IpcCommands } from "shared/IpcEvents";
 
 import { sendRendererCommand } from "./ipcCommands";
 
@@ -25,8 +26,8 @@ const SOCKET_PATH =
 const server = createServer(socket => {
     socket.on("data", d => {
         var data = d.toString().replaceAll("\n", "");
-        console.log("Received data from keybind:", data);
-        sendRendererCommand(data);
+        // console.log("Received data from keybind:", data);
+        sendRendererCommand(IpcCommands.KEYBIND_ACTION, data);
     });
     socket.on("error", err => {
         console.error("Keybind socket error:", err);

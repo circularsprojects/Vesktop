@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { findByPropsLazy } from "@vencord/types/webpack";
 import { SettingsRouter } from "@vencord/types/webpack/common";
 import { IpcCommands } from "shared/IpcEvents";
 
@@ -53,4 +54,17 @@ onIpcCommand(IpcCommands.GET_LANGUAGES, () => navigator.languages);
 
 onIpcCommand(IpcCommands.SCREEN_SHARE_PICKER, data => openScreenSharePicker(data.screens, data.skipPicker));
 
-onIpcCommand(IpcCommands.KEYBIND_ACTION, data => {});
+const VoiceActions = findByPropsLazy("toggleSelfMute");
+
+onIpcCommand(IpcCommands.KEYBIND_ACTION, data => {
+    switch (data) {
+        case "toggleMute":
+            VoiceActions.toggleSelfMute();
+            break;
+        case "toggleDeafen":
+            VoiceActions.toggleSelfDeaf();
+            break;
+        default:
+            return `Unknown keybind action: ${data}`;
+    }
+});
