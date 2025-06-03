@@ -33,6 +33,7 @@ import {
     DEFAULT_HEIGHT,
     DEFAULT_WIDTH,
     isLinux,
+    isMac,
     MessageBoxChoice,
     MIN_HEIGHT,
     MIN_WIDTH,
@@ -558,5 +559,5 @@ export async function createWindows() {
     });
 
     initArRPC();
-    if (isLinux) initKeybinds();
+    if (isLinux || isMac) initKeybinds();
 }

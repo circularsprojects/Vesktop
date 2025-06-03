@@ -7,18 +7,22 @@
 import { spawnSync } from "node:child_process";
 import { constants, existsSync, open, unlinkSync } from "node:fs";
 import { join } from "node:path";
+import { env, platform } from "node:process";
 
 import { Socket } from "net";
 import { IpcEvents } from "shared/IpcEvents";
 
 import { mainWin } from "./mainWindow";
 
-const xdgRuntimeDir = process.env.XDG_RUNTIME_DIR || process.env.TMP || "/tmp";
-const socketFile = join(xdgRuntimeDir, "vesktop-ipc");
+const socketFile =
+    platform === "win32"
+        ? "\\\\?\\pipe\\vesktop-ipc"
+        : join(env.XDG_RUNTIME_DIR || env.TMPDIR || env.TMP || env.TEMP || "/tmp", "vesktop-ipc");
 
 const Actions = new Set([IpcEvents.TOGGLE_SELF_DEAF, IpcEvents.TOGGLE_SELF_MUTE]);
 
 function createFIFO() {
+    console.log("Creating mkfifo for keybinds at", socketFile);
     if (existsSync(socketFile)) {
         try {
             unlinkSync(socketFile);
@@ -47,6 +51,7 @@ function openFIFO() {
 
             const pipe = new Socket({ fd });
             pipe.on("data", data => {
+                console.log("Received data from keybinds pipe:", data.toString().trim());
                 const action = data.toString().trim();
                 if (Actions.has(action as IpcEvents)) {
                     mainWin.webContents.send(action);

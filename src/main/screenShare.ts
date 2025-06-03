@@ -8,8 +8,8 @@ import { desktopCapturer, session, Streams } from "electron";
 import type { StreamPick } from "renderer/components/ScreenSharePicker";
 import { IpcCommands, IpcEvents } from "shared/IpcEvents";
 
-import { sendRendererCommand } from "./ipcCommands";
 import { isWayland } from "./constants";
+import { sendRendererCommand } from "./ipcCommands";
 import { handle } from "./utils/ipcWrappers";
 
 export function registerScreenShareHandler() {

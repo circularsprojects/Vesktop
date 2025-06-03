@@ -92,13 +92,5 @@ export const VesktopNative = {
             ipcRenderer.on(IpcEvents.IPC_COMMAND, (_, message) => cb(message));
         },
         respond: (response: IpcResponse) => ipcRenderer.send(IpcEvents.IPC_COMMAND, response)
-    },
-    voice: {
-        onToggleSelfMute: (listener: (...args: any[]) => void) => {
-            ipcRenderer.on(IpcEvents.TOGGLE_SELF_MUTE, listener);
-        },
-        onToggleSelfDeaf: (listener: (...args: any[]) => void) => {
-            ipcRenderer.on(IpcEvents.TOGGLE_SELF_DEAF, listener);
-        }
     }
 };
