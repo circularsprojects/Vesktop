@@ -69,5 +69,7 @@ export const enum IpcCommands {
 
     GET_LANGUAGES = "navigator.languages",
 
-    SCREEN_SHARE_PICKER = "screenshare:picker"
+    SCREEN_SHARE_PICKER = "screenshare:picker",
+
+    KEYBIND_ACTION = "keybind:action"
 }
